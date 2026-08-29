@@ -38,19 +38,19 @@ export default function VendorScreen({ vendorId }) {
   };
 
   const params = [
-    { label: '🧤 Personal Hygiene', score: vendor.personalHygiene, max: 20 },
-    { label: '🧊 Food Storage', score: vendor.foodStorage, max: 20 },
-    { label: '💧 Water Quality', score: vendor.waterQuality, max: 20 },
-    { label: '🍽️ Utensil Cleanliness', score: vendor.utensilCleanliness, max: 15 },
-    { label: '🗑️ Waste Disposal', score: vendor.wasteDisposal, max: 15 },
-    { label: '🥬 Ingredient Freshness', score: vendor.ingredientFreshness, max: 10 },
+    { label: 'Personal Hygiene', score: vendor.personalHygiene, max: 20 },
+    { label: 'Food Storage', score: vendor.foodStorage, max: 20 },
+    { label: 'Water Quality', score: vendor.waterQuality, max: 20 },
+    { label: 'Utensil Cleanliness', score: vendor.utensilCleanliness, max: 15 },
+    { label: 'Waste Disposal', score: vendor.wasteDisposal, max: 15 },
+    { label: 'Ingredient Freshness', score: vendor.ingredientFreshness, max: 10 },
   ];
 
   const getGrade = (score) => {
-    if (score >= 85) return 'Excellent ✅';
-    if (score >= 70) return 'Good 👍';
-    if (score >= 50) return 'Average ⚠️';
-    return 'Poor ❌';
+    if (score >= 85) return 'Excellent';
+    if (score >= 70) return 'Good';
+    if (score >= 50) return 'Average';
+    return 'Poor';
   };
 
   const getBarColor = (ratio) => {
