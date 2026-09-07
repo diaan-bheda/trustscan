@@ -3,11 +3,12 @@ import {
   View, Text, ScrollView, StyleSheet,
   ActivityIndicator, SafeAreaView
 } from 'react-native';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 
 export default function VendorScreen({ vendorId }) {
   const [vendor, setVendor] = useState(null);
+  const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,6 +19,16 @@ export default function VendorScreen({ vendorId }) {
         if (docSnap.exists()) {
           setVendor(docSnap.data());
         }
+
+        const q = query(
+          collection(db, 'inspections'),
+          where('vendorId', '==', vendorId),
+          orderBy('inspectedAt', 'desc')
+        );
+        const querySnap = await getDocs(q);
+        const logs = querySnap.docs.map(d => d.data());
+        setHistory(logs);
+
       } catch (e) {
         console.error(e);
       } finally {
@@ -57,6 +68,18 @@ export default function VendorScreen({ vendorId }) {
     if (ratio >= 0.8) return '#1D8A4B';
     if (ratio >= 0.6) return '#C47C0A';
     return '#C0392B';
+  };
+
+  const getScoreColor = (score) => {
+    if (score >= 85) return '#1D7A45';
+    if (score >= 70) return '#B86A00';
+    return '#C0392B';
+  };
+
+  const getScoreBg = (score) => {
+    if (score >= 85) return '#E6F4ED';
+    if (score >= 70) return '#FEF3DC';
+    return '#FDECEA';
   };
 
   return (
@@ -105,7 +128,7 @@ export default function VendorScreen({ vendorId }) {
           <View style={styles.infoGrid}>
             <View style={styles.infoItem}>
               <Text style={styles.infoLabel}>FSSAI</Text>
-              <Text style={styles.infoValue}>{vendor.fssai ? '✅ Active' : '❌ None'}</Text>
+              <Text style={styles.infoValue}>{vendor.fssai ? 'Active' : 'None'}</Text>
             </View>
             <View style={styles.infoItem}>
               <Text style={styles.infoLabel}>Registered Since</Text>
@@ -121,6 +144,33 @@ export default function VendorScreen({ vendorId }) {
             </View>
           </View>
         </View>
+
+        {/* Inspection History */}
+        {history.length > 0 && (
+          <View style={styles.card}>
+            <Text style={styles.cardTitle}>INSPECTION HISTORY</Text>
+            {history.map((item, index) => (
+              <View key={index} style={styles.historyItem}>
+                <View style={styles.historyLeft}>
+                  <Text style={styles.historyDate}>
+                    {formatDate(item.inspectedAt)}
+                  </Text>
+                  <Text style={styles.historyInspector}>{item.inspectorEmail}</Text>
+                </View>
+                <View style={[styles.historyScoreBadge, {
+                  backgroundColor: getScoreBg(item.totalScore)
+                }]}>
+                  <Text style={[styles.historyScore, {
+                    color: getScoreColor(item.totalScore)
+                  }]}>{item.totalScore}</Text>
+                  <Text style={[styles.historyScoreLabel, {
+                    color: getScoreColor(item.totalScore)
+                  }]}>/100</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        )}
 
         <Text style={styles.footer}>
           Scores are set exclusively by Trust-Scan certified inspectors.{'\n'}
@@ -240,6 +290,27 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   infoValue: { fontSize: 13, fontWeight: '500', color: '#1A1A18' },
+  historyItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0EDE8',
+  },
+  historyLeft: { flex: 1 },
+  historyDate: { fontSize: 13, fontWeight: '600', color: '#1A1A18', marginBottom: 2 },
+  historyInspector: { fontSize: 11, color: '#6B6B60' },
+  historyScoreBadge: {
+    borderRadius: 10,
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 2,
+  },
+  historyScore: { fontSize: 20, fontWeight: '800' },
+  historyScoreLabel: { fontSize: 11, fontWeight: '600', marginTop: 4 },
   footer: {
     textAlign: 'center',
     fontSize: 11,

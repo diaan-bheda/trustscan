@@ -4,6 +4,7 @@ import VendorScreen from './screens/vendor/VendorScreen';
 import LoginScreen from './screens/inspector/LoginScreen';
 import RatingScreen from './screens/inspector/RatingScreen';
 import QRScreen from './screens/inspector/QRScreen';
+import VendorRegistrationScreen from './screens/inspector/VendorRegistrationScreen';
 
 export default function App() {
   const [inspectorLoggedIn, setInspectorLoggedIn] = useState(false);
@@ -22,7 +23,15 @@ export default function App() {
             onPress={() => setActiveTab('rating')}
           >
             <Text style={[styles.tabText, activeTab === 'rating' && styles.activeTabText]}>
-              Audit Form
+              Audit
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.tab, activeTab === 'register' && styles.activeTab]}
+            onPress={() => setActiveTab('register')}
+          >
+            <Text style={[styles.tabText, activeTab === 'register' && styles.activeTabText]}>
+              Register
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -30,14 +39,13 @@ export default function App() {
             onPress={() => setActiveTab('qr')}
           >
             <Text style={[styles.tabText, activeTab === 'qr' && styles.activeTabText]}>
-              QR Generator
+              QR Code
             </Text>
           </TouchableOpacity>
         </View>
-        {activeTab === 'rating'
-          ? <RatingScreen onLogout={() => setInspectorLoggedIn(false)} />
-          : <QRScreen />
-        }
+        {activeTab === 'rating' && <RatingScreen onLogout={() => setInspectorLoggedIn(false)} />}
+        {activeTab === 'register' && <VendorRegistrationScreen />}
+        {activeTab === 'qr' && <QRScreen />}
       </View>
     );
   }
@@ -51,7 +59,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#1A56A0',
     paddingTop: 48,
     paddingHorizontal: 16,
-    paddingBottom: 0,
   },
   tab: {
     flex: 1, paddingVertical: 12, alignItems: 'center',
