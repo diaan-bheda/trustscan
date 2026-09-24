@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Trust-Scan — Hygiene Transparency Platform</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    :root {
+      --blue: #1A56A0;
+      --dark: #1A3A6A;
+      --mid: #2E75B6;
+      --lb: #E8F1FB;
+      --green: #1D7A45;
+      --lg: #E6F4ED;
+      --amber: #B86A00;
+      --la: #FEF3DC;
+      --red: #C0392B;
+      --lr: #FDECEA;
+      --bg: #F7F8FA;
+      --card: #FFFFFF;
+      --ink: #111827;
+      --muted: #6B7280;
+      --border: #E5E7EB;
+      --subtle: #F3F4F6;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit
+    }
+
+    /* NAV */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, .06)
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px
+    }
+
+    .nav-logo {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--blue);
+      letter-spacing: .02em
+    }
+
+    .nav-logo span {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 13px;
+      margin-left: 8px
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .nav-link {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: all .15s
+    }
+
+    .nav-link:hover {
+      color: var(--blue);
+      background: var(--lb)
+    }
+
+    .nav-cta {
+      background: var(--blue);
+      color: #fff !important;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 8px;
+      transition: all .15s
+    }
+
+    .nav-cta:hover {
+      background: var(--dark) !important
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--blue) 55%, var(--mid) 100%);
+      padding: 72px 20px 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: var(--bg);
+      border-radius: 50px 50px 0 0
+    }
+
+    .hero-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .55);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 18px
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 16px
+    }
+
+    .hero h1 span {
+      color: #52D48A
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 2vw, 18px);
+      color: rgba(255, 255, 255, .7);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.6
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 40px
+    }
+
+    .hero-stat .num {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: #52D48A
+    }
+
+    .hero-stat .label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .55);
+      margin-top: 2px
+    }
+
+    .hero-search {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 14px;
+      padding: 6px
+    }
+
+    .hero-search input {
+      flex: 1;
+      background: none;
+      border: none;
+      outline: none;
+      color: #fff;
+      font-size: 14px;
+      padding: 8px 12px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .hero-search input::placeholder {
+      color: rgba(255, 255, 255, .45)
+    }
+
+    .hero-search button {
+      background: #fff;
+      color: var(--blue);
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all .15s;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .hero-search button:hover {
+      background: #E8F1FB
+    }
+
+    /* MAIN LAYOUT */
+    .main-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px
+    }
+
+    @media(max-width:900px) {
+      .main-wrap {
+        grid-template-columns: 1fr
+      }
+
+      .sidebar {
+        display: none
+      }
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .sidebar-card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 18px;
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .04)
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    /* MAP */
+    .map-box {
+      background: var(--subtle);
+      border-radius: 12px;
+      height: 180px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden
+    }
+
+    .map-roads {
+      position: absolute;
+      inset: 0;
+      opacity: .25
+    }
+
+    .map-road-h {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 12px;
+      background: #CBD5E1;
+      transform: translateY(-50%)
+    }
+
+    .map-road-v1 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 33%;
+      width: 10px;
+      background: #CBD5E1
+    }
+
+    .map-road-v2 {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 25%;
+      width: 8px;
+      background: #CBD5E1
+    }
+
+    .map-legend {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      background: rgba(255, 255, 255, .92);
+      border-radius: 8px;
+      padding: 6px 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: var(--muted);
+      border: 1px solid var(--border)
+    }
+
+    .map-legend span {
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block
+    }
+
+    .map-pin {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      z-index: 2
+    }
+
+    .pin-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+      color: #fff;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
+      transition: transform .15s
+    }
+
+    .map-pin:hover .pin-dot {
+      transform: scale(1.25)
+    }
+
+    .pin-ring {
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 2px solid currentColor;
+      opacity: .35;
+      animation: ping 1.5s ease infinite
+    }
+
+    @keyframes ping {
+      0% {
+        transform: scale(1);
+        opacity: .35
+      }
+
+      70% {
+        transform: scale(1.6);
+        opacity: 0
+      }
+
+      100% {
+        transform: scale(1.6);
+        opacity: 0
+      }
+    }
+
+    /* FILTERS */
+    .filter-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .filter-check {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background .12s;
+      border: 1px solid transparent
+    }
+
+    .filter-check:hover {
+      background: var(--subtle);
+      border-color: var(--border)
+    }
+
+    .filter-check-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--ink)
+    }
+
+    .filter-check-label i {
+      width: 14px;
+      text-align: center
+    }
+
+    .filter-check input[type=checkbox] {
+      width: 14px;
+      height: 14px;
+      accent-color: var(--blue);
+      cursor: pointer
+    }
+
+    /* MAIN CONTENT */
+    .content-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: gap;
+      gap: 10px
+    }
+
+    .results-count {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted)
+    }
+
+    .results-count strong {
+      color: var(--ink)
+    }
+
+    .sort-select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      outline: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    /* CATEGORY CHIPS */
+    .chips-wrap {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin-bottom: 18px;
+      scrollbar-width: none
+    }
+
+    .chips-wrap::-webkit-scrollbar {
+      display: none
+    }
+
+    .chip {
+      white-space: nowrap;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .12s;
+      flex-shrink: 0
+    }
+
+    .chip:hover {
+      border-color: var(--blue);
+      color: var(--blue)
+    }
+
+    .chip.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    /* GRADE FILTER BAR */
+    .grade-bar {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 18px;
+      flex-wrap: wrap
+    }
+
+    .grade-pill {
+      padding: 5px 14px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all .12s
+    }
+
+    .grade-pill:hover {
+      border-color: var(--blue);
+      color: var(--blue)
+    }
+
+    .grade-pill.active {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue)
+    }
+
+    /* VENDOR CARDS */
+    .vendor-card {
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: all .15s;
+      cursor: pointer;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .04)
+    }
+
+    .vendor-card:hover {
+      border-color: var(--mid);
+      box-shadow: 0 4px 16px rgba(26, 86, 160, .1);
+      transform: translateY(-1px)
+    }
+
+    .vendor-card+.vendor-card {
+      margin-top: 10px
+    }
+
+    .card-left {
+      flex: 1;
+      min-width: 0
+    }
+
+    .card-grade-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px
+    }
+
+    .grade-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: .04em
+    }
+
+    .card-category {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 500
+    }
+
+    .card-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis
+    }
+
+    .card-location {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 8px
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px
+    }
+
+    .card-tag {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--subtle);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 4px
+    }
+
+    .card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      flex-shrink: 0
+    }
+
+    .score-badge {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif
+    }
+
+    .score-badge .score-num {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1
+    }
+
+    .score-badge .score-max {
+      font-size: 9px;
+      opacity: .75;
+      margin-top: 1px
+    }
+
+    .audit-btn {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: 'DM Sans', sans-serif;
+      white-space: nowrap
+    }
+
+    .audit-btn:hover {
+      background: var(--blue)
+    }
+
+    /* LOADING / EMPTY */
+    .loading-state,
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      background: var(--card);
+      border-radius: 16px;
+      border: 1px solid var(--border)
+    }
+
+    .loading-state i,
+    .empty-state i {
+      font-size: 32px;
+      color: var(--border);
+      margin-bottom: 12px
+    }
+
+    .loading-state p,
+    .empty-state h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 6px
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      color: var(--muted)
+    }
+
+    .empty-state button {
+      margin-top: 16px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    /* DRAWER */
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: flex-end
+    }
+
+    .drawer-overlay.open {
+      display: flex
+    }
+
+    .drawer {
+      background: var(--card);
+      width: 100%;
+      max-width: 480px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: -8px 0 40px rgba(0, 0, 0, .15)
+    }
+
+    .drawer-header {
+      background: var(--dark);
+      padding: 24px 20px 20px;
+      color: #fff;
+      position: relative
+    }
+
+    .drawer-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255, 255, 255, .1);
+      border: none;
+      color: #fff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s
+    }
+
+    .drawer-close:hover {
+      background: rgba(255, 255, 255, .2)
+    }
+
+    .drawer-grade-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px
+    }
+
+    .drawer-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 4px
+    }
+
+    .drawer-location {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .6);
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .drawer-score-big {
+      font-family: 'Syne', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: #52D48A;
+      line-height: 1
+    }
+
+    .drawer-score-label {
+      font-size: 9px;
+      color: rgba(255, 255, 255, .45);
+      letter-spacing: .1em;
+      margin-top: 2px
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px
+    }
+
+    .drawer-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .bar-row {
+      margin-bottom: 12px
+    }
+
+    .bar-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 5px
+    }
+
+    .bar-track {
+      height: 8px;
+      background: var(--subtle);
+      border-radius: 99px;
+      overflow: hidden
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width .6s ease
+    }
+
+    .drawer-info-box {
+      background: var(--subtle);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 14px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .drawer-remarks {
+      background: var(--la);
+      border-radius: 12px;
+      border: 1px solid #FDE68A;
+      padding: 14px;
+      margin-bottom: 16px
+    }
+
+    .drawer-remarks p {
+      font-size: 12px;
+      color: var(--amber);
+      line-height: 1.5
+    }
+
+    .drawer-footer {
+      padding: 14px 20px;
+      background: var(--subtle);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .report-btn {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--red);
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .close-btn {
+      background: var(--ink);
+      color: #fff;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .close-btn:hover {
+      background: var(--blue)
+    }
+
+    /* NOMINATE MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .5);
+      backdrop-filter: blur(4px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px
+    }
+
+    .modal-overlay.open {
+      display: flex
+    }
+
+    .modal {
+      background: var(--card);
+      border-radius: 20px;
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .2)
+    }
+
+    .modal-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 4px
+    }
+
+    .modal-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .modal label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      display: block;
+      margin-bottom: 5px;
+      margin-top: 12px
+    }
+
+    .modal input,
+    .modal select,
+    .modal textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 9px 12px;
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      transition: border-color .15s
+    }
+
+    .modal input:focus,
+    .modal select:focus,
+    .modal textarea:focus {
+      border-color: var(--blue)
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 8px;
+      justify-content: flex-end;
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border)
+    }
+
+    .modal-cancel {
+      background: var(--subtle);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .modal-submit {
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      display: none;
+      align-items: center;
+      gap: 8px;
+      z-index: 400;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .2)
+    }
+
+    .toast.show {
+      display: flex
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: rgba(255, 255, 255, .6);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 12px;
+      line-height: 1.8
+    }
+
+    footer strong {
+      color: #fff
+    }
+
+    /* HISTORY in drawer */
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .history-item:last-child {
+      border-bottom: none
+    }
+
+    .history-date {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      flex: 1
+    }
+
+    .history-inspector {
+      font-size: 10px;
+      color: var(--muted)
+    }
+
+    .history-score-badge {
+      border-radius: 8px;
+      padding: 5px 12px;
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 800
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-logo">TrustScan <span>Food Hygiene Platform</span></div>
+      <div class="nav-links">
+        <a href="#" class="nav-link">Browse Vendors</a>
+        <a href="#" class="nav-link">How It Works</a>
+        <a href="#" class="nav-link" onclick="openNominate()">Nominate a Stall</a>
+        <a href="#" class="nav-cta nav-link">Inspector Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-tag">Inspector-Verified Hygiene Scores</div>
+    <h1>Know your food is <span>safe</span><br>before you eat it.</h1>
+    <p class="hero-sub">Every vendor. Every canteen. Real-time hygiene scores verified by certified inspectors —
+      accessible with one QR scan.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num" id="statVendors">—</div>
+        <div class="label">Registered Vendors</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" id="statInspections">—</div>
+        <div class="label">Inspections Completed</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num" id="statAvg">—</div>
+        <div class="label">Avg Hygiene Score</div>
+      </div>
+    </div>
+    <div class="hero-search">
+      <input type="text" id="heroSearch" placeholder="Search vendor name or location..."
+        oninput="handleSearch(this.value)" />
+      <button onclick="handleSearch(document.getElementById('heroSearch').value)">Search</button>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <div class="main-wrap">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <div class="sidebar-title"><i class="fa-solid fa-map-location-dot" style="color:var(--blue)"></i> Vendor Map
+        </div>
+        <div class="map-box" id="mapBox">
+          <div class="map-roads">
+            <div class="map-road-h"></div>
+            <div class="map-road-v1"></div>
+            <div class="map-road-v2"></div>
+          </div>
+          <div id="mapPins"></div>
+          <div class="map-legend">
+            <span><span class="dot" style="background:#1D7A45"></span>Excellent</span>
+            <span><span class="dot" style="background:#2E75B6"></span>Good</span>
+            <span><span class="dot" style="background:#B86A00"></span>Average</span>
+            <span><span class="dot" style="background:#C0392B"></span>Poor</span>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">Click pins to view vendor details
+        </p>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title" style="justify-content:space-between">
+          <span><i class="fa-solid fa-sliders" style="color:var(--blue)"></i> Quick Filters</span>
+          <button onclick="resetFilters()"
+            style="font-size:10px;color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600">Reset</button>
+        </div>
+        <div class="filter-row">
+          <label class="filter-check">
+            <div class="filter-check-label"><i class="fa-solid fa-glass-water" style="color:#3B82F6"></i> Purified Water
+              Verified</div>
+            <input type="checkbox" id="chkWater" onchange="applyFilters()" />
+          </label>
+          <label class="filter-check">
+            <div class="filter-check-label"><i class="fa-solid fa-hand-sparkles" style="color:#8B5CF6"></i> Gloves &
+              Hair Cap</div>
+            <input type="checkbox" id="chkGloves" onchange="applyFilters()" />
+          </label>
+          <label class="filter-check">
+            <div class="filter-check-label"><i class="fa-solid fa-certificate" style="color:var(--green)"></i> FSSAI
+              Registered</div>
+            <input type="checkbox" id="chkFssai" onchange="applyFilters()" />
+          </label>
+          <label class="filter-check">
+            <div class="filter-check-label"><i class="fa-solid fa-qrcode" style="color:var(--ink)"></i> QR Badge
+              Displayed</div>
+            <input type="checkbox" id="chkQr" onchange="applyFilters()" />
+          </label>
+        </div>
+      </div>
+
+      <div class="sidebar-card" style="background:var(--lb);border-color:#BFDBFE">
+        <div
+          style="font-size:12px;font-weight:700;color:var(--blue);margin-bottom:6px;display:flex;align-items:center;gap:6px">
+          <i class="fa-solid fa-circle-info"></i> About Scores
+        </div>
+        <p style="font-size:11px;color:var(--dark);line-height:1.6">All hygiene scores are set exclusively by Trust-Scan
+          certified inspectors. Ratings cannot be altered by vendors or customers.</p>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <div>
+      <!-- Category chips -->
+      <div class="chips-wrap" id="categoryChips">
+        <div class="chip active" onclick="setCategory('All',this)">All Vendors</div>
+        <div class="chip" onclick="setCategory('Veg Street Food',this)">Veg Street Food</div>
+        <div class="chip" onclick="setCategory('Non-Veg',this)">Non-Veg</div>
+        <div class="chip" onclick="setCategory('Chaat',this)">Chaat & Savory</div>
+        <div class="chip" onclick="setCategory('Juices',this)">Juices & Shakes</div>
+        <div class="chip" onclick="setCategory('Snacks',this)">Snacks</div>
+        <div class="chip" onclick="setCategory('Meals',this)">Full Meals</div>
+      </div>
+
+      <!-- Grade filter -->
+      <div class="grade-bar">
+        <div class="grade-pill active" onclick="setGrade('All',this)">All Grades</div>
+        <div class="grade-pill" onclick="setGrade('Excellent',this)" style="--gc:#1D7A45">Excellent (85+)</div>
+        <div class="grade-pill" onclick="setGrade('Good',this)" style="--gc:#2E75B6">Good (70–84)</div>
+        <div class="grade-pill" onclick="setGrade('Average',this)" style="--gc:#B86A00">Average (50–69)</div>
+        <div class="grade-pill" onclick="setGrade('Poor',this)" style="--gc:#C0392B">Poor (&lt;50)</div>
+      </div>
+
+      <!-- List header -->
+      <div class="content-header">
+        <div class="results-count" id="resultsCount">Loading vendors...</div>
+        <select class="sort-select" onchange="setSort(this.value)">
+          <option value="score">Highest Score</option>
+          <option value="name">Name A–Z</option>
+          <option value="recent">Recently Inspected</option>
+        </select>
+      </div>
+
+      <!-- Cards -->
+      <div id="vendorList">
+        <div class="loading-state">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          <p>Loading vendors from database...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWER -->
+  <div class="drawer-overlay" id="drawer" onclick="closeDrawer(event)">
+    <div class="drawer" onclick="event.stopPropagation()">
+      <div class="drawer-header">
+        <button class="drawer-close" onclick="closeDrawerBtn()"><i class="fa-solid fa-xmark"></i></button>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start">
+          <div style="flex:1;min-width:0;padding-right:60px">
+            <div class="drawer-grade-row">
+              <span id="dGradeBadge" class="grade-badge"
+                style="background:var(--lg);color:var(--green)">Excellent</span>
+              <span id="dCategory" style="font-size:11px;color:rgba(255,255,255,.55)">Category</span>
+            </div>
+            <div class="drawer-name" id="dName">Vendor Name</div>
+            <div class="drawer-location"><i class="fa-solid fa-location-dot"
+                style="color:rgba(255,255,255,.4)"></i><span id="dLocation">Location</span></div>
+          </div>
+          <div style="text-align:right">
+            <div class="drawer-score-big" id="dScore">—</div>
+            <div class="drawer-score-label">/100 SCORE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-body">
+        <!-- Info box -->
+        <div class="drawer-info-box" style="margin-bottom:16px">
+          <div
+            style="background:var(--lb);border-radius:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+            <i class="fa-solid fa-qrcode" style="color:var(--blue);font-size:18px"></i>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:6px"><i
+                class="fa-solid fa-circle-check" style="color:var(--green)"></i> Trust-Scan Verified</div>
+            <div id="dLastInspected" style="font-size:11px;color:var(--muted);margin-top:2px">Last inspected: —</div>
+            <div id="dFssai" style="font-size:11px;color:var(--muted)">FSSAI: —</div>
+          </div>
+          <span id="dInspCount"
+            style="margin-left:auto;background:var(--lb);color:var(--blue);font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap">—
+            inspections</span>
+        </div>
+
+        <!-- Score breakdown bars -->
+        <div style="margin-bottom:18px">
+          <div class="drawer-section-title">Score Breakdown</div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span style="display:flex;align-items:center;gap:6px"><i
+                  class="fa-solid fa-hands-wash" style="color:#8B5CF6"></i>Personal Hygiene</span><span id="bPersonal"
+                style="font-weight:700;color:var(--blue)">—/20</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barPersonal" style="width:0%;background:#8B5CF6"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span style="display:flex;align-items:center;gap:6px"><i
+                  class="fa-solid fa-snowflake" style="color:#3B82F6"></i>Food Storage</span><span id="bStorage"
+                style="font-weight:700;color:var(--blue)">—/20</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barStorage" style="width:0%;background:#3B82F6"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span style="display:flex;align-items:center;gap:6px"><i
+                  class="fa-solid fa-glass-water" style="color:#0EA5E9"></i>Water Quality</span><span id="bWater"
+                style="font-weight:700;color:var(--blue)">—/20</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barWater" style="width:0%;background:#0EA5E9"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span style="display:flex;align-items:center;gap:6px"><i
+                  class="fa-solid fa-utensils" style="color:#F59E0B"></i>Utensil Cleanliness</span><span id="bUtensil"
+                style="font-weight:700;color:var(--blue)">—/15</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barUtensil" style="width:0%;background:#F59E0B"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span style="display:flex;align-items:center;gap:6px"><i
+                  class="fa-solid fa-trash-can" style="color:#6B7280"></i>Waste Disposal</span><span id="bWaste"
+                style="font-weight:700;color:var(--blue)">—/15</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barWaste" style="width:0%;background:#6B7280"></div>
+            </div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-label-row"><span style="display:flex;align-items:center;gap:6px"><i class="fa-solid fa-leaf"
+                  style="color:var(--green)"></i>Ingredient Freshness</span><span id="bFreshness"
+                style="font-weight:700;color:var(--blue)">—/10</span></div>
+            <div class="bar-track">
+              <div class="bar-fill" id="barFreshness" style="width:0%;background:var(--green)"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Inspection history -->
+        <div id="historySection" style="margin-bottom:16px">
+          <div class="drawer-section-title">Inspection History</div>
+          <div id="historyList">
+            <p style="font-size:12px;color:var(--muted)">Loading history...</p>
+          </div>
+        </div>
+
+        <!-- Vendor info -->
+        <div style="margin-bottom:16px">
+          <div class="drawer-section-title">Vendor Info</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="background:var(--subtle);border-radius:10px;padding:10px">
+              <div
+                style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">
+                Food Type</div>
+              <div id="dFoodType" style="font-size:13px;font-weight:500;color:var(--ink)">—</div>
+            </div>
+            <div style="background:var(--subtle);border-radius:10px;padding:10px">
+              <div
+                style="font-size:9px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:3px">
+                Registered Since</div>
+              <div id="dRegSince" style="font-size:13px;font-weight:500;color:var(--ink)">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-footer">
+        <button class="report-btn" onclick="reportViolation()"><i class="fa-solid fa-flag"></i> Report
+          Violation</button>
+        <button class="close-btn" onclick="closeDrawerBtn()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOMINATE MODAL -->
+  <div class="modal-overlay" id="nominateModal" onclick="closeNominate(event)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-title">Nominate a Vendor for Inspection</div>
+      <div class="modal-sub">Request an official hygiene audit for a local stall or canteen</div>
+      <form onsubmit="submitNomination(event)">
+        <label>Vendor / Stall Name *</label>
+        <input type="text" required placeholder="e.g. Ramesh Panipuri Corner" />
+        <label>Location / Landmark *</label>
+        <input type="text" required placeholder="e.g. Near FC Road, Pune" />
+        <label>Food Type</label>
+        <input type="text" placeholder="e.g. Veg Street Food, Chaat" />
+        <label>Your Name (optional)</label>
+        <input type="text" placeholder="Anonymous" />
+        <div class="modal-footer">
+          <button type="button" class="modal-cancel" onclick="closeNominateBtn()">Cancel</button>
+          <button type="submit" class="modal-submit">Submit Nomination</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"><i class="fa-solid fa-circle-check" style="color:#52D48A"></i><span
+      id="toastMsg">Done</span></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <strong>Trust-Scan</strong> — QR-Based Hygiene Transparency Platform<br>
+    Scores are set exclusively by certified inspectors. Not affiliated with FSSAI.<br>
+    <a href="https://github.com/diaan-bheda/trustscan" style="color:#52D48A">github.com/diaan-bheda/trustscan</a>
+    &nbsp;|&nbsp;
+    <a href="https://trustscan-five.vercel.app" style="color:#52D48A">trustscan-five.vercel.app</a>
+  </footer>
+
+  <!-- FIREBASE SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, collection, getDocs, doc, getDoc, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+
+    // ── PASTE YOUR FIREBASE CONFIG HERE ──
+    const firebaseConfig = {
+      apiKey: "AIzaSyAS4FPI5n79OAfiphqeSbuDr0j7sEJjpFY",
+      authDomain: "trustscan-a0425.firebaseapp.com",
+      projectId: "trustscan-a0425",
+      storageBucket: "trustscan-a0425.firebasestorage.app",
+      messagingSenderId: "681633957063",
+      appId: "1:681633957063:web:be68368385a2aecbddeae2"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // ── STATE ──
+    let allVendors = [];
+    let filteredVendors = [];
+    let searchQuery = '';
+    let selectedCategory = 'All';
+    let selectedGrade = 'All';
+    let activeSort = 'score';
+    let activeFilters = { water: false, gloves: false, fssai: false, qr: false };
+
+    // ── GRADE HELPERS ──
+    function getGrade(score) {
+      if (score >= 85) return 'Excellent';
+      if (score >= 70) return 'Good';
+      if (score >= 50) return 'Average';
+      return 'Poor';
+    }
+
+    function getGradeColors(score) {
+      if (score >= 85) return { bg: '#E6F4ED', text: '#1D7A45', bar: '#1D7A45', dot: '#1D7A45' };
+      if (score >= 70) return { bg: '#E8F1FB', text: '#1A56A0', bar: '#2E75B6', dot: '#2E75B6' };
+      if (score >= 50) return { bg: '#FEF3DC', text: '#B86A00', bar: '#B86A00', dot: '#B86A00' };
+      return { bg: '#FDECEA', text: '#C0392B', bar: '#C0392B', dot: '#C0392B' };
+    }
+
+    function formatDate(ts) {
+      if (!ts) return 'N/A';
+      const d = ts.toDate ? ts.toDate() : new Date(ts);
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
+
+    // ── LOAD ALL VENDORS FROM FIREBASE ──
+    async function loadVendors() {
+      try {
+        const snap = await getDocs(collection(db, 'vendors'));
+        allVendors = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+
+        // Update hero stats
+        document.getElementById('statVendors').textContent = allVendors.length;
+        const totalScore = allVendors.reduce((s, v) => s + (v.totalScore || 0), 0);
+        document.getElementById('statAvg').textContent = allVendors.length ? Math.round(totalScore / allVendors.length) : '—';
+
+        // Load inspection count
+        const inspSnap = await getDocs(collection(db, 'inspections'));
+        document.getElementById('statInspections').textContent = inspSnap.size;
+
+        applyFilters();
+        renderMapPins();
+      } catch (e) {
+        console.error(e);
+        document.getElementById('vendorList').innerHTML = `<div class="empty-state"><i class="fa-solid fa-triangle-exclamation"></i><h4>Could not load vendors</h4><p>Check Firebase config and Firestore rules.</p></div>`;
+      }
+    }
+
+    // ── FILTER & SORT ──
+    function applyFilters() {
+      const q = searchQuery.toLowerCase();
+      const waterChk = document.getElementById('chkWater').checked;
+      const glovesChk = document.getElementById('chkGloves').checked;
+      const fssaiChk = document.getElementById('chkFssai').checked;
+
+      filteredVendors = allVendors.filter(v => {
+        const matchSearch = !q || v.name?.toLowerCase().includes(q) || v.location?.toLowerCase().includes(q) || v.foodType?.toLowerCase().includes(q);
+        const matchCat = selectedCategory === 'All' || (v.foodType || '').toLowerCase().includes(selectedCategory.toLowerCase());
+        const matchGrade = selectedGrade === 'All' || getGrade(v.totalScore || 0) === selectedGrade;
+        const matchFssai = !fssaiChk || v.fssai;
+        const matchWater = !waterChk || (v.waterQuality >= 18);
+        const matchGloves = !glovesChk || (v.personalHygiene >= 17);
+        return matchSearch && matchCat && matchGrade && matchFssai && matchWater && matchGloves;
+      });
+
+      if (activeSort === 'score') filteredVendors.sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
+      else if (activeSort === 'name') filteredVendors.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+      else if (activeSort === 'recent') filteredVendors.sort((a, b) => {
+        const aT = a.lastInspected?.toDate?.() || new Date(0);
+        const bT = b.lastInspected?.toDate?.() || new Date(0);
+        return bT - aT;
+      });
+
+      renderVendors();
+      renderMapPins();
+    }
+
+    // ── RENDER VENDOR CARDS ──
+    function renderVendors() {
+      const list = document.getElementById('vendorList');
+      const count = document.getElementById('resultsCount');
+      count.innerHTML = `Showing <strong>${filteredVendors.length}</strong> vendor${filteredVendors.length !== 1 ? 's' : ''}`;
+
+      if (filteredVendors.length === 0) {
+        list.innerHTML = `<div class="empty-state"><i class="fa-solid fa-clipboard-question"></i><h4>No Matching Vendors</h4><p>Try adjusting your search or filters.</p><button onclick="resetAll()">Clear All Filters</button></div>`;
+        return;
+      }
+
+      list.innerHTML = filteredVendors.map(v => {
+        const score = v.totalScore || 0;
+        const grade = getGrade(score);
+        const colors = getGradeColors(score);
+        return `
+      <div class="vendor-card" onclick="openDrawer('${v.id}')">
+        <div class="card-left">
+          <div class="card-grade-row">
+            <span class="grade-badge" style="background:${colors.bg};color:${colors.text}">${grade}</span>
+            <span class="card-category">${v.foodType || 'Street Food'}</span>
+          </div>
+          <div class="card-name">${v.name || 'Unnamed Vendor'}</div>
+          <div class="card-location"><i class="fa-solid fa-location-dot" style="color:var(--muted)"></i>${v.location || 'Location not set'}</div>
+          <div class="card-tags">
+            ${v.fssai ? `<span class="card-tag"><i class="fa-solid fa-check" style="color:var(--green)"></i>FSSAI Active</span>` : ''}
+            ${(v.waterQuality >= 18) ? `<span class="card-tag"><i class="fa-solid fa-check" style="color:#3B82F6"></i>Purified Water</span>` : ''}
+            ${(v.inspectionCount > 1) ? `<span class="card-tag"><i class="fa-solid fa-check" style="color:var(--amber)"></i>${v.inspectionCount} Inspections</span>` : ''}
+          </div>
+        </div>
+        <div class="card-right">
+          <div class="score-badge" style="background:${colors.bg}">
+            <span class="score-num" style="color:${colors.text}">${score}</span>
+            <span class="score-max" style="color:${colors.text}">/100</span>
+          </div>
+          <button class="audit-btn" onclick="event.stopPropagation();openDrawer('${v.id}')">View Audit</button>
+        </div>
+      </div>
+    `;
+      }).join('');
+    }
+
+    // ── RENDER MAP PINS ──
+    function renderMapPins() {
+      const container = document.getElementById('mapPins');
+      if (!container) return;
+      const positions = [{ top: '30%', left: '25%' }, { top: '50%', left: '60%' }, { top: '65%', left: '35%' }, { top: '22%', left: '72%' }, { top: '75%', left: '70%' }, { top: '40%', left: '15%' }];
+      container.innerHTML = filteredVendors.slice(0, 6).map((v, i) => {
+        const score = v.totalScore || 0;
+        const c = getGradeColors(score);
+        return `<div class="map-pin" style="top:${positions[i % positions.length].top};left:${positions[i % positions.length].left}" onclick="openDrawer('${v.id}')" title="${v.name}">
+      <span class="pin-ring" style="color:${c.dot}"></span>
+      <div class="pin-dot" style="background:${c.dot}">${score}</div>
+    </div>`;
+      }).join('');
+    }
+
+    // ── OPEN DRAWER ──
+    async function openDrawer(vendorId) {
+      const vendor = allVendors.find(v => v.id === vendorId);
+      if (!vendor) return;
+
+      const score = vendor.totalScore || 0;
+      const grade = getGrade(score);
+      const colors = getGradeColors(score);
+
+      document.getElementById('dGradeBadge').textContent = grade;
+      document.getElementById('dGradeBadge').style.background = colors.bg;
+      document.getElementById('dGradeBadge').style.color = colors.text;
+      document.getElementById('dCategory').textContent = vendor.foodType || '';
+      document.getElementById('dName').textContent = vendor.name || '';
+      document.getElementById('dLocation').textContent = vendor.location || '';
+      document.getElementById('dScore').textContent = score;
+      document.getElementById('dLastInspected').textContent = 'Last inspected: ' + formatDate(vendor.lastInspected);
+      document.getElementById('dFssai').textContent = 'FSSAI: ' + (vendor.fssai ? 'Active' : 'Not registered');
+      document.getElementById('dInspCount').textContent = (vendor.inspectionCount || 0) + ' inspections';
+      document.getElementById('dFoodType').textContent = vendor.foodType || '—';
+      document.getElementById('dRegSince').textContent = formatDate(vendor.registeredSince);
+
+      // Bars
+      const setBar = (id, barId, val, max) => {
+        document.getElementById(id).textContent = `${val}/${max}`;
+        setTimeout(() => { document.getElementById(barId).style.width = `${(val / max) * 100}%`; }, 100);
+      };
+      setBar('bPersonal', 'barPersonal', vendor.personalHygiene || 0, 20);
+      setBar('bStorage', 'barStorage', vendor.foodStorage || 0, 20);
+      setBar('bWater', 'barWater', vendor.waterQuality || 0, 20);
+      setBar('bUtensil', 'barUtensil', vendor.utensilCleanliness || 0, 15);
+      setBar('bWaste', 'barWaste', vendor.wasteDisposal || 0, 15);
+      setBar('bFreshness', 'barFreshness', vendor.ingredientFreshness || 0, 10);
+
+      document.getElementById('drawer').classList.add('open');
+
+      // Load inspection history
+      document.getElementById('historyList').innerHTML = '<p style="font-size:12px;color:var(--muted)">Loading...</p>';
+      try {
+        const q2 = query(collection(db, 'inspections'), where('vendorId', '==', vendorId), orderBy('inspectedAt', 'desc'));
+        const histSnap = await getDocs(q2);
+        const items = histSnap.docs.map(d => d.data());
+        if (items.length === 0) {
+          document.getElementById('historyList').innerHTML = '<p style="font-size:12px;color:var(--muted)">No inspection history yet.</p>';
+        } else {
+          document.getElementById('historyList').innerHTML = items.map(item => {
+            const c = getGradeColors(item.totalScore || 0);
+            return `<div class="history-item">
+          <div>
+            <div class="history-date">${formatDate(item.inspectedAt)}</div>
+            <div class="history-inspector">${item.inspectorEmail || 'Inspector'}</div>
+          </div>
+          <div class="history-score-badge" style="background:${c.bg};color:${c.text}">${item.totalScore}/100</div>
+        </div>`;
+          }).join('');
+        }
+      } catch (e) {
+        document.getElementById('historyList').innerHTML = '<p style="font-size:12px;color:var(--muted)">Could not load history.</p>';
+      }
+    }
+
+    // ── CLOSE DRAWER ──
+    function closeDrawer(e) { if (e.target === document.getElementById('drawer')) closeDrawerBtn(); }
+    function closeDrawerBtn() {
+      document.getElementById('drawer').classList.remove('open');
+      document.querySelectorAll('.bar-fill').forEach(b => b.style.width = '0%');
+    }
+
+    // ── NOMINATE ──
+    function openNominate() { document.getElementById('nominateModal').classList.add('open'); }
+    function closeNominate(e) { if (e.target === document.getElementById('nominateModal')) closeNominateBtn(); }
+    function closeNominateBtn() { document.getElementById('nominateModal').classList.remove('open'); }
+    function submitNomination(e) { e.preventDefault(); closeNominateBtn(); showToast('Nomination submitted for inspector review!'); e.target.reset(); }
+
+    // ── REPORT ──
+    function reportViolation() { closeDrawerBtn(); showToast('Hygiene concern flagged for inspector review.'); }
+
+    // ── TOAST ──
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ── RESET ──
+    function resetAll() {
+      searchQuery = ''; selectedCategory = 'All'; selectedGrade = 'All';
+      document.getElementById('heroSearch').value = '';
+      document.getElementById('chkWater').checked = false;
+      document.getElementById('chkGloves').checked = false;
+      document.getElementById('chkFssai').checked = false;
+      document.getElementById('chkQr').checked = false;
+      document.querySelectorAll('.chip').forEach((c, i) => c.classList.toggle('active', i === 0));
+      document.querySelectorAll('.grade-pill').forEach((c, i) => c.classList.toggle('active', i === 0));
+      applyFilters();
+      showToast('All filters cleared');
+    }
+
+    // ── EXPOSE TO WINDOW ──
+    window.handleSearch = (v) => { searchQuery = v; applyFilters(); };
+    window.setCategory = (cat, el) => { selectedCategory = cat; document.querySelectorAll('.chip').forEach(c => c.classList.remove('active')); el.classList.add('active'); applyFilters(); };
+    window.setGrade = (g, el) => { selectedGrade = g; document.querySelectorAll('.grade-pill').forEach(c => c.classList.remove('active')); el.classList.add('active'); applyFilters(); };
+    window.setSort = (s) => { activeSort = s; applyFilters(); };
+    window.applyFilters = applyFilters;
+    window.resetFilters = () => { document.getElementById('chkWater').checked = false; document.getElementById('chkGloves').checked = false; document.getElementById('chkFssai').checked = false; document.getElementById('chkQr').checked = false; applyFilters(); };
+    window.resetAll = resetAll;
+    window.openDrawer = openDrawer;
+    window.closeDrawer = closeDrawer;
+    window.closeDrawerBtn = closeDrawerBtn;
+    window.openNominate = openNominate;
+    window.closeNominate = closeNominate;
+    window.closeNominateBtn = closeNominateBtn;
+    window.submitNomination = submitNomination;
+    window.reportViolation = reportViolation;
+
+    loadVendors();
+  </script>
+</body>
+
+</html>
