@@ -9,7 +9,14 @@ export default function QRScreen() {
     const [vendorId, setVendorId] = useState('');
     const [showQR, setShowQR] = useState(false);
 
-    const url = `https://trustscan-five.vercel.app/vendor/${vendorId}`;
+    const getBaseUrl = () => {
+        if (typeof window !== 'undefined') {
+            return `${window.location.protocol}//${window.location.host}`;
+        }
+        return 'https://trustscan-five.vercel.app';
+    };
+
+    const url = `${getBaseUrl()}/vendor/${vendorId}`;
     return (
         <SafeAreaView style={styles.safe}>
             <View style={styles.container}>
